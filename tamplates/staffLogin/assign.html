@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/studentStyle/dash.css">    
+    <link rel="stylesheet" href="/style/staff/staff.css">
+</head>
+<body>
+    <div class="dashboardContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/asset/user.jpg" alt="User Profile">
+                <h3 id="userName">John Doe</h3> <!-- This can be dynamic based on the logged-in user -->
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/tamplates/staffLogin/staffDash.html">Dashboard</a></li>
+                    <li><a href="assign.html">Assignments</a></li>
+                    <li><a href="grade.html">Grades</a></li>
+                    <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Welcome to Your Assessment Section</h2>
+                <div class="user-info">
+                </div>
+            </header>
+
+            <section class="dashboard-welcome">
+                <h3>Assessment</h3>
+                <p>Staff can upload Assignments Here for students</p>
+            </section>
+            
+            <section class="dashboard-info">
+                <main id="ass">
+                    <input type="file" id="pdf-upload" accept="application/pdf" multiple />
+                    <div id="file-preview"></div> <!-- To display file names preview with download links -->
+                    <div class="btn">
+                        <button onclick="savePdfToLocalStorage()">Save Assignments</button>
+                        <button onclick="clearSavedPdf()">Clear Saved PDFs</button>
+                    </div>
+                </main>
+            </section>
+        </main>
+    </div>
+    <script src="/script/db.js"></script>
+    <script src="/script/staff/assigment.js"></script>
+</body>
+</html>

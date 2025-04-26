@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/studentStyle/dash.css">    
+
+</head>
+<body>
+    <div class="dashboardContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/asset/user.jpg" alt="User Profile">
+                <h3 id="userName">John Doe</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/tamplates/staffLogin/staffDash.html">Dashboard</a></li>
+                    <li><a href="assign.html">Assignments</a></li>
+                    <li><a href="grade.html">Grades</a></li>
+                     <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+            
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Welcome to Your Dashboard</h2>
+                <div class="user-info">
+                </div>
+            </header>
+
+            <section class="dashboard-welcome">
+                <h3>Overview</h3>
+                <p>Here is an overview of your student portal. You can access your assignments, grades, and profile settings from the sidebar.</p>
+            </section>
+            
+            <section class="dashboard-info">
+                <h3>Your Information</h3>
+                <ul>
+                    <img src="/asset/user.jpg" alt="">
+                    <li><strong>Email:</strong> <span id="userEmail">johndoe@example.com</span></li>
+                    <li><strong>Student ID:</strong> <span id="userId">12345</span></li>
+                    <li><strong>Age:</strong> <span id="userAgeDisplay">30</span></li>
+                    <li><strong>Rank:</strong> <span id="Studentclass"></span></li>
+
+                    
+
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script src="/script/db.js"></script>
+    <script>
+        // Sample user data (this would come from the login process)
+      
+    </script>
+</body>
+</html>

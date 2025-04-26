@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Assignment Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/studentStyle/dash.css">
+    <link rel="stylesheet" href="/style/staff/staff.css">
+    <link rel="stylesheet" href="/style/studentStyle/assignment.css">
+</head>
+<body>
+    <div class="dashboardContainer">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/asset/user.jpg" alt="User Profile">
+                <h3 id="userName">Student Name</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>  <li><a href="/tamplates/studentLogin/dashboord.html">Dashboard</a></li>
+                    <li><a href="grade.html">Grades</a></li>
+                    <li><a href="assignemnt.html">Assignments</a></li>
+                  
+                    <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Student Assignment Management</h2>
+            </header>
+            <section class="dashboard-info">
+                <main id="ass" class="ma">
+                    <input type="file" style="display: none;" disabled id="pdf-upload" accept="application/pdf" multiple />
+                    <div id="file-preview"></div>
+                    <div class="btn"></div>
+                </main>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define the function here to avoid undefined errors
+            function uploadAssignmentToStaff() {
+                // Your file upload logic goes here
+                alert('Assignment uploaded!');
+            }
+
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (!loggedInUser) {
+                alert("You must log in first.");
+                window.location.href = "/login.html";
+            }
+
+            const studentId = loggedInUser.id;
+            const studentName = loggedInUser.name;
+
+            document.getElementById('userName').textContent = studentName;
+
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('loggedInUser');
+                    alert("You have been logged out.");
+                    window.location.href = "/login.html";
+                });
+            }
+
+            // Handle file upload
+            const fileInput = document.getElementById('assignment-upload');
+            if (fileInput) {
+                fileInput.addEventListener('change', function(event) {
+                    handleFileUpload(event);
+                });
+            }
+
+            // Handle the file upload logic
+            function handleFileUpload(event) {
+                const files = event.target.files;
+                if (files.length === 0) {
+                    alert("No file selected.");
+                    return;
+                }
+                // Validate the file, preview, etc.
+            }
+        });
+    </script>
+
+    <script src="/script"></script>
+    <script src="/script/staff/assigment.js"></script>
+</body>
+</html>

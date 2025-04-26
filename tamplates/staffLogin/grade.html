@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/studentStyle/dash.css">    
+    <link rel="stylesheet" href="/style/staff/staff.css">
+</head>
+<body>
+    <div class="dashboardContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/asset/user.jpg" alt="User Profile">
+                <h3 id="userName">John Doe</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/tamplates/staffLogin/staffDash.html">Dashboard</a></li>
+                    <li><a href="assign.html">Assignments</a></li>
+                    <li><a href="grade.html">Grades</a></li>
+                         <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Grade Management</h2>
+                <div class="user-info"></div>
+            </header>
+
+            <section class="dashboard-welcome">
+                <h3>Assign Grades to Students</h3>
+                <p>Select a student and upload their grade file.</p>
+            </section>
+
+            <section class="dashboard-info">
+                <main id="grades">
+                    <!-- Student selection dropdown -->
+                    <label for="student-select">Select Student:</label>
+                    <select id="student-select">
+                        <option value="">--Select Student--</option>
+                    </select>
+                    
+                    <input type="file" id="pdf-upload" accept="application/pdf" />
+                    <div id="file-preview"></div> <!-- Preview of the uploaded file -->
+                    <div class="btn">
+                        <button onclick="saveGradeToLocalStorage()">Save Grade</button>
+                    </div>
+                    <div class="btn">
+                        <button onclick="clearGrades()">Clear Grades</button>
+                    </div>
+                </main>
+
+                <section id="saved-grades">
+                    <h4>Saved Grades</h4>
+                    <ul id="grade-list">
+                        <!-- Uploaded grade files will be listed here -->
+                    </ul>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        const database = [
+            {
+                id: "CSC20251231",
+                name: "John ",
+                email: "johndoe@example.com",
+                password: "12345678",
+                rank: "Student",
+                class: "JSS 1",
+                age: 16
+            },
+            {
+                id: "CSC20251232",
+                name: "Jane Smith",
+                email: "janesmith@example.com",
+                password: "12345678",
+                rank: "Student",
+                class: "JSS 2",
+                age: 17
+            },
+            {
+                id: "CSC20251233",
+                name: "Alex Johnson",
+                email: "alexjohnson@example.com",
+                password: "12345678",
+                rank: "Student",
+                class: "JSS 1",
+                age: 14
+            },
+            {
+                id: "CSC20251234",
+                name: "Sadiq Ibrahim",
+                email: "Sadiqibahimmuhammad@example.com",
+                rank: "Student",
+                class: "JSS 1",
+                password: "12345678",
+                age: 14
+            },
+            {
+                id: "CSC20251235",
+                name: "Aliyu Ibrahim",
+                email: "aliyuibrahim@example.com",
+                rank: "Student",
+                class: "JSS 1",
+                password: "12345678",
+                age: 12
+            },
+            {
+                id: "CSCS1",
+                name: "Ibrahim Sani",
+                email: "saniibrahim@example.com",
+                rank: "Staff",
+                password: "12345678",
+                age: 35,
+                sw: 2,
+                class: ""
+            },
+            {
+                id: "CSCS2",
+                name: "Aliyu Isa",
+                email: "aliyuisa@example.com",
+                rank: "Staff",
+                password: "12345678",
+                age: 27,
+                sw: 2,
+                class: ""
+            },
+        ];
+
+        const students = database.filter(user => user.rank === "Student");
+
+        window.addEventListener('load', () => {
+            const studentSelect = document.getElementById('student-select');
+
+            students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = student.name;
+                studentSelect.appendChild(option);
+            });
+        });
+
+        document.getElementById('pdf-upload').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('file-preview').textContent = `Selected file: ${file.name}`;
+            }
+        });
+
+        function saveGradeToLocalStorage() {
+            const fileInput = document.getElementById('pdf-upload');
+            const studentSelect = document.getElementById('student-select');
+            const file = fileInput.files[0];
+            const studentId = studentSelect.value;
+
+            if (file && studentId) {
+                const studentName = students.find(student => student.id === studentId).name;
+                const reader = new FileReader();
+
+                reader.onloadend = function () {
+                    let grades = JSON.parse(localStorage.getItem(studentId)) || [];
+                    const customFileName = `${studentName}_grade_${file.name}`; // Student's name + custom file name
+
+                    grades.push({
+                        fileName: customFileName,  // Save file with custom name
+                        fileData: reader.result
+                    });
+
+                    localStorage.setItem(studentId, JSON.stringify(grades));
+                    displaySavedGrades(studentId);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a student and upload a grade file.');
+            }
+        }
+
+        function displaySavedGrades(studentId) {
+            const gradeList = document.getElementById('grade-list');
+            gradeList.innerHTML = ''; // Clear the list before adding new items
+
+            const grades = JSON.parse(localStorage.getItem(studentId)) || [];
+
+            grades.forEach(grade => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${grade.fileName}</strong> <!-- Display the file name with student's name -->
+                    <a href="${grade.fileData}" download="${grade.fileName}">Download</a>
+                `;
+                gradeList.appendChild(li);
+            });
+        }
+
+        document.getElementById('student-select').addEventListener('change', (e) => {
+            const studentId = e.target.value;
+            if (studentId) {
+                displaySavedGrades(studentId);
+            } else {
+                document.getElementById('grade-list').innerHTML = ''; // Clear the list when no student is selected
+            }
+        });
+
+        function clearGrades() {
+            const studentSelect = document.getElementById('student-select');
+            const studentId = studentSelect.value;
+
+            if (studentId) {
+                localStorage.removeItem(studentId); // Remove grades for the selected student
+                displaySavedGrades(studentId);
+                alert("Grades cleared for the selected student.");
+            } else {
+                alert("Please select a student to clear grades.");
+            }
+        }
+    </script>
+<script src="/script/staff/grade.js"></script>
+</body>
+</html>

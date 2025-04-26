@@ -1,0 +1,211 @@
+:root {
+    --schoolColor: rgba(12, 241, 146, 0.548); /* School Color */
+    --green: rgb(25, 141, 70); /* Green Color */
+    --white: white; /* White Color */
+    --font-color: #333; /* Default text color */
+    --light-gray: #f4f7fc; /* Light gray background */
+    --gray: #666; /* Gray color for text */
+    --dark-gray: #444; /* Darker gray for text */
+    --red: #f44336; /* Red for logout button */
+    --dark-red: #d32f2f; /* Darker red for hover */
+    --green-dark: #388e3c; /* Dark green for hover */
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--font-color);
+}
+
+/* Dashboard Container */
+.dashboardContainer {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: var(--green); /* Sidebar green background */
+    color: var(--white); /* White text */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .profile {
+    text-align: center;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .profile h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+}
+
+.sidebar-nav li {
+    margin: 15px 0;
+}
+
+.sidebar-nav a {
+    color: var(--white); /* White links */
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 8px 0;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.sidebar-nav a:hover {
+    background-color: var(--green-dark); /* Dark green on hover */
+}
+
+.sidebar-nav #logoutBtn {
+    margin-top: 20px;
+    background-color: var(--red); /* Red color for logout button */
+    color: var(--white);
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar-nav #logoutBtn:hover {
+    background-color: var(--dark-red); /* Darker red on hover */
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding:0;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 1px 2px 3px 2px;
+    background-color: var(--white); /* White background for the content */
+    overflow-y: auto;
+}
+
+/* Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.dashboard-header h2 {
+    font-size: 24px;
+    color: var(--white);
+
+}
+
+.user-info p {
+    font-size: 18px;
+    color: var(--gray);
+}
+
+/* Welcome Section */
+.dashboard-welcome {
+    margin: 40px;
+
+}
+
+.dashboard-welcome h3 {
+
+    font-size: 22px;
+    color: var(--font-color);
+}
+
+.dashboard-welcome p {
+    font-size: 16px;
+    color: var(--gray);
+}
+
+/* Information Section */
+.dashboard-info h3 {
+    font-size: 22px;
+    color: var(--font-color);
+    margin: 10px;
+    text-decoration: underline;
+}
+
+.dashboard-info ul {
+    list-style-type: none;
+
+    border: solid 1px var(--gray);
+    padding: 20px;
+    box-shadow: 2px 3px ;
+    width: max-content;
+    gap: 30px;
+    margin: 10px;
+    img{
+        width: 200px;
+        margin: 0 auto;
+        justify-content: center;
+        display: flex;
+    }
+}
+
+.dashboard-info li {
+    font-size: 16px;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+}
+
+.dashboard-info li strong {
+    color: var(--green); /* Green color for highlighted info */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboardContainer {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-info p {
+        margin-top: 10px;
+    }
+    .dashboard-info ul img {
+        display: none;
+    }
+    
+}

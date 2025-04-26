@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/studentStyle/dash.css">    
+    <link rel="stylesheet" href="/style/staff/staff.css">
+</head>
+<body>
+    <div class="dashboardContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/asset/user.jpg" alt="User Profile">
+                <h3 id="userName">Student Name</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/tamplates/studentLogin/dashboord.html">Dashboard</a></li>
+                    <li><a href="grade.html">Grades</a></li>
+                    <li><a href="assignemnt.html">Assignments</a></li>
+                    
+                    <li><a href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Welcome to Your Grade Management Dashboard</h2>
+                <div class="user-info"></div>
+            </header>
+
+            <section class="dashboard-welcome">
+                <h3>Your Grades</h3>
+                <p>Below are your uploaded grades. Please review your assignments and download them if necessary.</p>
+            </section>
+
+            <section class="dashboard-info">
+                <main id="grades">
+                    <h4>Your Saved Grades:</h4>
+                    <ul id="grade-list">
+                        <!-- Uploaded grade files for the logged-in student will be listed here -->
+                    </ul>
+                </main>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        // Predefined list of students
+        const database = [
+            {
+                id: "CSC20251231",
+                name: "John",
+                email: "johndoe@example.com",
+                rank: "Student",
+                class: "JSS 1",
+                age: 16
+            },
+            {
+                id: "CSC20251232",
+                name: "Jane Smith",
+                email: "janesmith@example.com",
+                rank: "Student",
+                class: "JSS 2",
+                age: 17
+            },
+            {
+                id: "CSC20251233",
+                name: "Alex Johnson",
+                email: "alexjohnson@example.com",
+                rank: "Student",
+                class: "JSS 1",
+                age: 14
+            }
+        ];
+
+        // Simulating login: When a student logs in, we save their data in localStorage
+        function login(studentId) {
+            const user = database.find(u => u.id === studentId);
+            if (user) {
+                localStorage.setItem('loggedInUser', JSON.stringify(user));  // Save user data in localStorage
+                window.location.reload();  // Reload the page to load student-specific content
+            }
+        }
+
+        // Check if a student is logged in when the page loads
+        window.addEventListener('load', () => {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (loggedInUser) {
+                document.getElementById('userName').textContent = loggedInUser.name;  // Set the logged-in student's name
+
+                // Display the logged-in student's grades
+                displaySavedGrades(loggedInUser.id);
+            } else {
+                alert("Please log in to access your grades.");
+                // Redirect to a login page or show login options
+            }
+        });
+
+        // Display saved grades for the logged-in student
+        function displaySavedGrades(studentId) {
+            const gradeList = document.getElementById('grade-list');
+            gradeList.innerHTML = '';  // Clear previous grades
+
+            // Get grades for the logged-in student from localStorage
+            const grades = JSON.parse(localStorage.getItem(studentId)) || [];
+
+            if (grades.length > 0) {
+                grades.forEach(grade => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <strong>${grade.fileName}</strong> <!-- Display the file name with student's name -->
+                        <a href="${grade.fileData}" download="${grade.fileName}">Download</a>
+                    `;
+                    gradeList.appendChild(li);
+                });
+            } else {
+                gradeList.innerHTML = "<li>No grades available.</li>";
+            }
+        }
+
+        // Handle logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('loggedInUser');
+            alert("You have been logged out.");
+            window.location.reload();  // Reload the page to reset content
+        });
+    </script>
+</body>
+</html>

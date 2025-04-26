@@ -1,0 +1,51 @@
+:root { 
+    --schoolColor: rgba(12, 241, 146, 0.548);
+    --ash: rgb(206, 198, 198);
+    --black: black;
+    --green: rgb(25, 141, 70);
+    --white: white;
+    --font-color: #333; /* Default text color */
+    --font-family: 'Arial', sans-serif; /* Font */
+    --red: red;
+}
+
+#ass{
+    display: grid;
+    width: 100%;
+     input{
+        width: 400px;
+        height: 100px;
+        margin: 10px auto;
+        background: transparent;
+        border: solid 2px var(--green);
+        padding: 10px auto;
+        color: var(--green);
+        font-weight: bolder;
+        transition: 1s;
+        align-items: center;
+        justify-content: center;
+
+    }
+     input:hover{
+        border: 0;
+        cursor: pointer;
+        background-color:var(--green);
+        color: white;
+    }
+    .btn{
+        display: flex;
+        justify-content: space-between;
+        width: max-content;
+        margin: 10px auto;
+        button{
+            margin: 10px;
+            padding: 20px;
+            background-color: var(--green);
+            border: solid 2px var(--white);
+            color: var(--white);
+            border-top-right-radius: 10px;
+            cursor: pointer;
+
+        }
+    }
+}

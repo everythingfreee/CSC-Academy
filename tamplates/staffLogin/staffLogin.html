@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+    <div class="loginContainer">
+        <main>
+            <form id="loginForm">
+                <img src="/asset/logo.JPG" alt="CSC Academy Logo">
+                <h2>CSC ACADEMY</h2>
+                <h3>STAFF PORTAL SIGN IN</h3>
+
+                <!-- Email (user ID) Input -->
+                <div class="input">
+                    <input id="user" type="text" placeholder="Enter your email" name="email" required>
+                    <div class="icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input">
+                    <input id="password" type="password" placeholder="Enter your password" name="password" required>
+                    <div class="icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+
+                <!-- Remember Me and Forgot Password Links -->
+                <div class="more">
+                    <div class="rem">
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        <label for="remember_me">Remember Me</label>
+                    </div>
+                    <div class="fp">
+                        <a href="/forgot-password.html">Forgot Password</a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">SIGN IN</button>
+
+                <div style="height: 20px;"></div>
+
+                <div class="ins">
+                    <button class="switch">
+                        <a href="/student-login.html">Student Login</a>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- JavaScript Link -->
+    <script src="/script/db.js"></script>
+    <script src="/script/staff/switch.js"></script>
+</body>
+</html>

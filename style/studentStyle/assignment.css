@@ -1,0 +1,24 @@
+:root {
+    --schoolColor: rgba(12, 241, 146, 0.548); /* School Color */
+    --green: rgb(25, 141, 70); /* Green Color */
+    --white: white; /* White Color */
+    --font-color: #333; /* Default text color */
+    --light-gray: #f4f7fc; /* Light gray background */
+    --gray: #666; /* Gray color for text */
+    --dark-gray: #444; /* Darker gray for text */
+    --red: #f44336; /* Red for logout button */
+    --dark-red: #d32f2f; /* Darker red for hover */
+    --green-dark: #388e3c; /* Dark green for hover */
+}
+
+.ma{
+
+    margin: 10em 30px;
+    #file-preview{
+        background-color:var(--schoolColor);
+        width: max-content;
+        padding: 10px;
+        border: solid 1px var(--gray);
+        border-radius: 8px;
+    }
+}
